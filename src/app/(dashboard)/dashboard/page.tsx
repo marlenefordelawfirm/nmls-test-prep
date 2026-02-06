@@ -1,5 +1,6 @@
 import { getCurrentUser } from '@/lib/utils/auth';
-import { Clock, CheckCircle2, ArrowRight, TrendingUp, Zap, Lightbulb } from 'lucide-react';
+import { Clock, CheckCircle2, ArrowRight, TrendingUp, Zap, Lightbulb, BookOpen } from 'lucide-react';
+import Link from 'next/link';
 
 export default async function DashboardPage() {
   const user = await getCurrentUser();
@@ -42,6 +43,51 @@ export default async function DashboardPage() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Quick Actions */}
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <Link
+          href="/practice"
+          className="bg-blue-700 hover:bg-blue-800 text-white p-6 rounded-xl shadow-lg transition-all flex items-center gap-4 group"
+        >
+          <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center">
+            <BookOpen className="w-6 h-6" />
+          </div>
+          <div className="flex-1">
+            <h3 className="text-lg font-bold mb-1">Start Practice</h3>
+            <p className="text-sm text-blue-100">Choose a content area</p>
+          </div>
+          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+        </Link>
+
+        <button
+          className="bg-white hover:bg-slate-50 border-2 border-slate-200 p-6 rounded-xl transition-all flex items-center gap-4 group"
+          disabled
+        >
+          <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center">
+            <Clock className="w-6 h-6 text-slate-500" />
+          </div>
+          <div className="flex-1 text-left">
+            <h3 className="text-lg font-bold text-slate-900 mb-1">Full Exam</h3>
+            <p className="text-sm text-slate-500">125 questions, 190 min</p>
+          </div>
+          <span className="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded-full font-bold">Soon</span>
+        </button>
+
+        <button
+          className="bg-white hover:bg-slate-50 border-2 border-slate-200 p-6 rounded-xl transition-all flex items-center gap-4 group"
+          disabled
+        >
+          <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center">
+            <TrendingUp className="w-6 h-6 text-slate-500" />
+          </div>
+          <div className="flex-1 text-left">
+            <h3 className="text-lg font-bold text-slate-900 mb-1">Review Weak Areas</h3>
+            <p className="text-sm text-slate-500">AI-suggested topics</p>
+          </div>
+          <span className="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded-full font-bold">Soon</span>
+        </button>
       </section>
 
       {/* Current Module Progress */}
