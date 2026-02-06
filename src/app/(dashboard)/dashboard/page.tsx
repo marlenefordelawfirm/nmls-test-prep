@@ -1,4 +1,5 @@
 import { getCurrentUser } from '@/lib/utils/auth';
+import { Clock, CheckCircle2, ArrowRight, TrendingUp, Zap, Lightbulb } from 'lucide-react';
 
 export default async function DashboardPage() {
   const user = await getCurrentUser();
@@ -61,11 +62,11 @@ export default async function DashboardPage() {
             </p>
             <div className="flex items-center gap-8 mb-10">
               <div className="flex items-center gap-3">
-                <span className="text-blue-400">⏱️</span>
+                <Clock className="w-5 h-5 text-blue-400" />
                 <span className="text-sm font-medium text-slate-600">4h 25m remaining</span>
               </div>
               <div className="flex items-center gap-3">
-                <span className="text-blue-400">✅</span>
+                <CheckCircle2 className="w-5 h-5 text-blue-400" />
                 <span className="text-sm font-medium text-slate-600">6 Lessons left</span>
               </div>
             </div>
@@ -74,7 +75,7 @@ export default async function DashboardPage() {
               disabled
             >
               Continue learning
-              <span>→</span>
+              <ArrowRight className="w-5 h-5" />
             </button>
           </div>
 
@@ -116,7 +117,7 @@ export default async function DashboardPage() {
           <div className="flex justify-between items-center mb-8">
             <h3 className="text-xl font-bold text-slate-800">Recent Performance</h3>
             <div className="flex items-center gap-2 px-3 py-1 bg-emerald-50 text-emerald-600 rounded-full text-xs font-bold">
-              <span>📈</span>
+              <TrendingUp className="w-4 h-4" />
               +5% increase
             </div>
           </div>
@@ -149,8 +150,8 @@ export default async function DashboardPage() {
         {/* AI-Driven Focus Areas */}
         <article className="bg-white rounded-xl shadow-sm p-8">
           <div className="flex items-center gap-3 mb-8">
-            <div className="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center text-xl">
-              ⚡
+            <div className="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center">
+              <Zap className="w-6 h-6" />
             </div>
             <h3 className="text-xl font-bold text-slate-800">AI-Driven Focus Areas</h3>
           </div>
@@ -176,7 +177,7 @@ export default async function DashboardPage() {
 
             <div className="p-4 bg-indigo-50/50 rounded-xl border border-indigo-100">
               <div className="flex items-start gap-3">
-                <span className="text-indigo-500 text-xl">💡</span>
+                <Lightbulb className="w-5 h-5 text-indigo-500 flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="text-sm font-bold text-indigo-900 mb-1">Learning Insight</p>
                   <p className="text-sm text-indigo-700 leading-snug">

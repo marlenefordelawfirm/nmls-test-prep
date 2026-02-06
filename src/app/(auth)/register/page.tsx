@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { signIn } from 'next-auth/react';
+import { AlertCircle, Info, MapPin, ArrowRight, ArrowLeft } from 'lucide-react';
 
 const US_STATES = [
   'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
@@ -103,7 +104,7 @@ export default function RegisterPage() {
             {error && (
               <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl" role="alert">
                 <div className="flex items-start gap-3">
-                  <span className="text-red-500">⚠️</span>
+                  <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
                   <span className="text-sm font-medium">{error}</span>
                 </div>
               </div>
@@ -159,7 +160,7 @@ export default function RegisterPage() {
                   placeholder="••••••••••••"
                 />
                 <p className="mt-2 text-xs text-slate-500 flex items-start gap-2">
-                  <span>ℹ️</span>
+                  <Info className="w-4 h-4 flex-shrink-0" />
                   <span>Must be 12+ characters with uppercase, lowercase, number, and special character</span>
                 </p>
               </div>
@@ -183,7 +184,7 @@ export default function RegisterPage() {
                   ))}
                 </select>
                 <p className="mt-2 text-xs text-slate-500 flex items-start gap-2">
-                  <span>📍</span>
+                  <MapPin className="w-4 h-4 flex-shrink-0" />
                   <span>For state-specific NMLS content</span>
                 </p>
               </div>
@@ -205,7 +206,7 @@ export default function RegisterPage() {
               ) : (
                 <>
                   Create account
-                  <span>→</span>
+                  <ArrowRight className="w-5 h-5" />
                 </>
               )}
             </button>
@@ -221,8 +222,9 @@ export default function RegisterPage() {
 
         {/* Back to Home */}
         <div className="text-center mt-6">
-          <Link href="/" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">
-            ← Back to home
+          <Link href="/" className="text-sm text-slate-600 hover:text-slate-900 transition-colors inline-flex items-center gap-2">
+            <ArrowLeft className="w-4 h-4" />
+            Back to home
           </Link>
         </div>
       </div>

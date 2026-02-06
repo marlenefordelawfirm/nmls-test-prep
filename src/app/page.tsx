@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Sparkles, Check, BookOpen, Target, CheckCircle2, ArrowRight } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -35,7 +36,7 @@ export default function Home() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <section className="py-24 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 text-blue-700 text-sm font-bold border border-blue-100 mb-8">
-            <span>✨</span>
+            <Sparkles className="w-4 h-4" />
             <span>AI-Powered NMLS Exam Preparation</span>
           </div>
 
@@ -55,7 +56,7 @@ export default function Home() {
               className="bg-blue-700 text-white hover:bg-blue-800 px-10 py-4 rounded-xl text-lg font-bold shadow-lg shadow-blue-900/20 transition-all flex items-center justify-center gap-3"
             >
               Start Free Trial
-              <span>→</span>
+              <ArrowRight className="w-5 h-5" />
             </Link>
             <Link
               href="/login"
@@ -68,15 +69,15 @@ export default function Home() {
           {/* Trust Indicators */}
           <div className="flex flex-wrap justify-center gap-8 text-sm text-slate-500">
             <div className="flex items-center gap-2">
-              <span className="text-emerald-500">✓</span>
+              <Check className="w-4 h-4 text-emerald-500" />
               <span>200+ Practice Questions</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-emerald-500">✓</span>
+              <Check className="w-4 h-4 text-emerald-500" />
               <span>100% NMLS Compliant</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-emerald-500">✓</span>
+              <Check className="w-4 h-4 text-emerald-500" />
               <span>Adaptive Learning</span>
             </div>
           </div>
@@ -95,8 +96,8 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white rounded-xl shadow-sm p-8 border border-slate-200/50 hover:shadow-lg transition-shadow">
-              <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-3xl mb-6">
-                📚
+              <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
+                <BookOpen className="w-8 h-8 text-blue-700" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">
                 5 Complete Content Areas
@@ -108,8 +109,8 @@ export default function Home() {
             </div>
 
             <div className="bg-white rounded-xl shadow-sm p-8 border border-slate-200/50 hover:shadow-lg transition-shadow">
-              <div className="w-14 h-14 bg-indigo-50 rounded-xl flex items-center justify-center text-3xl mb-6">
-                🎯
+              <div className="w-14 h-14 bg-indigo-50 rounded-xl flex items-center justify-center mb-6">
+                <Target className="w-8 h-8 text-indigo-700" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">
                 Adaptive Learning Engine
@@ -121,8 +122,8 @@ export default function Home() {
             </div>
 
             <div className="bg-white rounded-xl shadow-sm p-8 border border-slate-200/50 hover:shadow-lg transition-shadow">
-              <div className="w-14 h-14 bg-emerald-50 rounded-xl flex items-center justify-center text-3xl mb-6">
-                ✅
+              <div className="w-14 h-14 bg-emerald-50 rounded-xl flex items-center justify-center mb-6">
+                <CheckCircle2 className="w-8 h-8 text-emerald-700" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">
                 Real Exam Simulation
@@ -210,7 +211,7 @@ export default function Home() {
               className="bg-white text-blue-700 hover:bg-blue-50 px-10 py-4 rounded-xl text-lg font-bold shadow-lg inline-flex items-center gap-3 transition-all"
             >
               Create Your Free Account
-              <span>→</span>
+              <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
         </section>

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { AlertCircle, ArrowRight, ArrowLeft } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -62,7 +63,7 @@ export default function LoginPage() {
             {error && (
               <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl" role="alert">
                 <div className="flex items-start gap-3">
-                  <span className="text-red-500">⚠️</span>
+                  <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
                   <span className="text-sm font-medium">{error}</span>
                 </div>
               </div>
@@ -120,7 +121,7 @@ export default function LoginPage() {
               ) : (
                 <>
                   Sign in
-                  <span>→</span>
+                  <ArrowRight className="w-5 h-5" />
                 </>
               )}
             </button>
@@ -136,8 +137,9 @@ export default function LoginPage() {
 
         {/* Back to Home */}
         <div className="text-center mt-6">
-          <Link href="/" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">
-            ← Back to home
+          <Link href="/" className="text-sm text-slate-600 hover:text-slate-900 transition-colors inline-flex items-center gap-2">
+            <ArrowLeft className="w-4 h-4" />
+            Back to home
           </Link>
         </div>
       </div>
