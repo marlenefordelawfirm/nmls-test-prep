@@ -1,0 +1,174 @@
+import { prisma } from '@/lib/db';
+import { Question } from '@prisma/client';
+
+export interface ExamResult {
+  totalQuestions: number;
+  correctAnswers: number;
+  rawScore: number; // percentage
+  loftAdjustedScore: number; // difficulty-adjusted
+  passed: boolean;
+  passingScore: number;
+  timeSpent: number; // seconds
+  breakdown: {
+    contentAreaId: string;
+    contentAreaName: string;
+    correct: number;
+    total: number;
+    percentage: number;
+  }[];
+}
+
+export class ExamScoringService {
+  /**
+   * Calculate exam score with LOFT difficulty adjustment
+   * LOFT (Linear On-The-Fly Testing) adjusts scores based on question difficulty
+   */
+  static async calculateScore(
+    userId: string,
+    answers: Record<number, string>,
+    questions: Question[],
+    timeSpent: number
+  ): Promise<ExamResult> {
+    // Calculate raw score
+    let correctCount = 0;
+    const questionResults: Array<{
+      questionId: string;
+      correct: boolean;
+      difficulty: string;
+      contentAreaId: string;
+    }> = [];
+
+    questions.forEach((question, idx) => {
+      const isCorrect = answers[idx] === question.correctAnswer;
+      if (isCorrect) correctCount++;
+
+      questionResults.push({
+        questionId: question.id,
+        correct: isCorrect,
+        difficulty: question.difficulty,
+        contentAreaId: question.contentAreaId
+      });
+    });
+
+    const rawScore = (correctCount / questions.length) * 100;
+
+    // Apply LOFT difficulty adjustment
+    const loftAdjustedScore = this.applyLOFTAdjustment(
+      questionResults,
+      rawScore
+    );
+
+    // Get content area breakdown
+    const breakdown = await this.getContentAreaBreakdown(questionResults);
+
+    // Determine if passed (75% threshold)
+    const passingScore = 75;
+    const passed = loftAdjustedScore >= passingScore;
+
+    return {
+      totalQuestions: questions.length,
+      correctAnswers: correctCount,
+      rawScore,
+      loftAdjustedScore,
+      passed,
+      passingScore,
+      timeSpent,
+      breakdown
+    };
+  }
+
+  /**
+   * Apply LOFT difficulty adjustment
+   * Harder questions contribute more to the score
+   */
+  private static applyLOFTAdjustment(
+    results: Array<{ correct: boolean; difficulty: string }>,
+    rawScore: number
+  ): number {
+    // Weight by difficulty
+    const difficultyWeights: Record<string, number> = {
+      EASY: 1.0,
+      MEDIUM: 1.2,
+      HARD: 1.5
+    };
+
+    let weightedScore = 0;
+    let totalWeight = 0;
+
+    results.forEach(result => {
+      const weight = difficultyWeights[result.difficulty] || 1.0;
+      if (result.correct) {
+        weightedScore += weight;
+      }
+      totalWeight += weight;
+    });
+
+    // Calculate adjusted percentage
+    const adjustedScore = (weightedScore / totalWeight) * 100;
+
+    // Blend raw and adjusted scores (70% adjusted, 30% raw)
+    // This prevents over-penalizing students on hard questions
+    const blendedScore = (adjustedScore * 0.7) + (rawScore * 0.3);
+
+    return Math.round(blendedScore * 100) / 100; // Round to 2 decimals
+  }
+
+  /**
+   * Get breakdown by content area
+   */
+  private static async getContentAreaBreakdown(
+    results: Array<{ questionId: string; correct: boolean; contentAreaId: string }>
+  ): Promise<ExamResult['breakdown']> {
+    // Group by content area
+    const areaMap = new Map<string, { correct: number; total: number }>();
+
+    results.forEach(result => {
+      const existing = areaMap.get(result.contentAreaId) || { correct: 0, total: 0 };
+      existing.total++;
+      if (result.correct) existing.correct++;
+      areaMap.set(result.contentAreaId, existing);
+    });
+
+    // Get content area names
+    const areaIds = Array.from(areaMap.keys());
+    const contentAreas = await prisma.contentArea.findMany({
+      where: { id: { in: areaIds } },
+      select: { id: true, name: true }
+    });
+
+    // Build breakdown
+    return contentAreas.map(area => {
+      const stats = areaMap.get(area.id)!;
+      return {
+        contentAreaId: area.id,
+        contentAreaName: area.name,
+        correct: stats.correct,
+        total: stats.total,
+        percentage: Math.round((stats.correct / stats.total) * 100)
+      };
+    });
+  }
+
+  /**
+   * Save exam result to database
+   */
+  static async saveExamResult(
+    userId: string,
+    result: ExamResult
+  ): Promise<string> {
+    const examResult = await prisma.examResult.create({
+      data: {
+        userId,
+        totalQuestions: result.totalQuestions,
+        correctAnswers: result.correctAnswers,
+        rawScore: result.rawScore,
+        adjustedScore: result.loftAdjustedScore,
+        passed: result.passed,
+        timeSpent: result.timeSpent,
+        breakdown: result.breakdown as any
+      }
+    });
+
+    return examResult.id;
+  }
+}

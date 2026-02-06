@@ -77,8 +77,8 @@ test.describe('Complete Quiz Flow with Admin Account', () => {
     console.log('✅ Navigated to results page');
 
     // Check for results elements
-    await expect(page.locator('text=/\\d+%/')).toBeVisible(); // Score percentage
-    await expect(page.locator('text=/\\d+\\/\\d+/')).toBeVisible(); // Correct answers (X/Y format)
+    await expect(page.locator('text=/\\d+%/').first()).toBeVisible(); // Score percentage
+    await expect(page.locator('text=/\\d+\\/\\d+/').first()).toBeVisible(); // Correct answers (X/Y format)
 
     // Check for either success or improvement message
     const hasSuccessMessage = await page.locator('text=Section Mastered').isVisible().catch(() => false);

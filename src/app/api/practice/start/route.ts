@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import { getCurrentUser } from '@/lib/utils/auth';
+import { AdaptiveQuestionSelectionService } from '@/services/AdaptiveQuestionSelectionService';
 
 export async function POST(request: NextRequest) {
   try {
@@ -35,31 +36,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get 20 random questions from this content area
-    // For now, we'll use a simple random selection
-    // Later, this will be replaced with the adaptive algorithm
-    const allQuestions = await prisma.question.findMany({
-      where: { contentAreaId },
-      include: {
-        subTopic: {
-          select: {
-            id: true,
-            name: true
-          }
-        }
-      }
+    // Use adaptive question selection based on user performance
+    const selectedQuestions = await AdaptiveQuestionSelectionService.selectQuestions({
+      userId: user.id,
+      contentAreaId,
+      count: 20
     });
 
-    if (allQuestions.length === 0) {
+    if (selectedQuestions.length === 0) {
       return NextResponse.json(
         { error: 'No questions available for this content area' },
         { status: 404 }
       );
     }
-
-    // Shuffle and take up to 20 questions
-    const shuffled = allQuestions.sort(() => Math.random() - 0.5);
-    const selectedQuestions = shuffled.slice(0, Math.min(20, allQuestions.length));
 
     // Create a test attempt
     const testAttempt = await prisma.testAttempt.create({

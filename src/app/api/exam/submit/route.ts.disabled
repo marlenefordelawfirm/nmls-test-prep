@@ -1,0 +1,62 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { getCurrentUser } from '@/lib/utils/auth';
+import { ExamScoringService } from '@/services/ExamScoringService';
+import { prisma } from '@/lib/db';
+
+export async function POST(request: NextRequest) {
+  try {
+    const user = await getCurrentUser();
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const { answers, timeSpent } = await request.json();
+
+    if (!answers || typeof timeSpent !== 'number') {
+      return NextResponse.json(
+        { error: 'Answers and timeSpent are required' },
+        { status: 400 }
+      );
+    }
+
+    // Get the questions (same 125 questions in order)
+    const questions = await prisma.question.findMany({
+      take: 125,
+      include: {
+        contentArea: true,
+        subTopic: true
+      },
+      orderBy: [
+        { contentArea: { id: 'asc' } },
+        { difficulty: 'asc' }
+      ]
+    });
+
+    // Calculate score with LOFT adjustment
+    const result = await ExamScoringService.calculateScore(
+      user.id,
+      answers,
+      questions,
+      timeSpent
+    );
+
+    // Save exam result to database
+    const examResultId = await ExamScoringService.saveExamResult(
+      user.id,
+      result
+    );
+
+    return NextResponse.json({
+      success: true,
+      resultId: examResultId,
+      result
+    });
+
+  } catch (error) {
+    console.error('Exam submission error:', error);
+    return NextResponse.json(
+      { error: 'Failed to submit exam' },
+      { status: 500 }
+    );
+  }
+}

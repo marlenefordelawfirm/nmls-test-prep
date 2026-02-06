@@ -1,0 +1,41 @@
+import { redirect } from 'next/navigation';
+import { getCurrentUser } from '@/lib/utils/auth';
+import { prisma } from '@/lib/db';
+import { ExamResults } from '@/components/exam/ExamResults';
+
+interface ExamResultPageProps {
+  params: {
+    resultId: string;
+  };
+}
+
+export default async function ExamResultPage({ params }: ExamResultPageProps) {
+  const user = await getCurrentUser();
+  if (!user) {
+    redirect('/login');
+  }
+
+  const examResult = await prisma.testAttempt.findUnique({
+    where: { id: params.resultId },
+    include: {
+      user: {
+        select: {
+          id: true,
+          name: true,
+          email: true
+        }
+      }
+    }
+  });
+
+  if (!examResult) {
+    redirect('/dashboard');
+  }
+
+  // Verify ownership
+  if (examResult.userId !== user.id) {
+    redirect('/dashboard');
+  }
+
+  return <ExamResults result={examResult} />;
+}

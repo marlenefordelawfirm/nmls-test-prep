@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import { getCurrentUser } from '@/lib/utils/auth';
+import { PerformanceAnalysisService } from '@/services/PerformanceAnalysisService';
 
 interface SubmittedAnswer {
   questionId: string;
@@ -169,6 +170,9 @@ export async function POST(request: NextRequest) {
     const timeSpent = testAttempt.endTime && updatedAttempt.endTime
       ? Math.floor((updatedAttempt.endTime.getTime() - testAttempt.startTime.getTime()) / 1000)
       : 0;
+
+    // Update user performance tracking for adaptive learning
+    await PerformanceAnalysisService.updatePerformance(user.id, attemptId);
 
     return NextResponse.json({
       success: true,
