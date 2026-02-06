@@ -1,65 +1,139 @@
-import Image from "next/image";
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      {/* Navigation */}
+      <nav className="bg-white shadow-sm border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16">
+            <div className="flex items-center">
+              <h1 className="text-xl font-bold text-indigo-600">NMLS Test Prep</h1>
+            </div>
+            <div className="flex items-center space-x-4">
+              <Link
+                href="/login"
+                className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium"
+              >
+                Sign in
+              </Link>
+              <Link
+                href="/register"
+                className="bg-indigo-600 text-white hover:bg-indigo-700 px-4 py-2 rounded-md text-sm font-medium"
+              >
+                Get Started
+              </Link>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      </nav>
+
+      {/* Hero Section */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="text-center">
+          <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 mb-6">
+            Pass Your NMLS Exam
+            <span className="block text-indigo-600">With Confidence</span>
+          </h1>
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            Comprehensive test preparation platform with adaptive learning, AI-powered
+            study aids, and real exam simulations to help you succeed.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/register"
+              className="bg-indigo-600 text-white hover:bg-indigo-700 px-8 py-3 rounded-md text-lg font-medium shadow-lg"
+            >
+              Start Free Trial
+            </Link>
+            <Link
+              href="/login"
+              className="bg-white text-indigo-600 hover:bg-gray-50 px-8 py-3 rounded-md text-lg font-medium border-2 border-indigo-600"
+            >
+              Sign In
+            </Link>
+          </div>
+        </div>
+
+        {/* Features */}
+        <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <div className="text-4xl mb-4">📚</div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              5 Content Areas
+            </h3>
+            <p className="text-gray-600">
+              Complete coverage of Federal Mortgage Laws, General Knowledge, Loan
+              Origination, Ethics, and Uniform State Content
+            </p>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <div className="text-4xl mb-4">🎯</div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              Adaptive Learning
+            </h3>
+            <p className="text-gray-600">
+              AI-powered algorithm identifies your weak areas and focuses on what you
+              need to improve most
+            </p>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <div className="text-4xl mb-4">✅</div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              Real Exam Simulation
+            </h3>
+            <p className="text-gray-600">
+              Practice with full 125-question exams that mirror the actual NMLS test
+              format and difficulty
+            </p>
+          </div>
+        </div>
+
+        {/* Stats */}
+        <div className="mt-24 bg-white rounded-lg shadow-xl p-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div>
+              <div className="text-4xl font-bold text-indigo-600 mb-2">200+</div>
+              <div className="text-gray-600">Practice Questions</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold text-indigo-600 mb-2">50+</div>
+              <div className="text-gray-600">Sub-Topics Covered</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold text-indigo-600 mb-2">100%</div>
+              <div className="text-gray-600">NMLS Compliant</div>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA */}
+        <div className="mt-24 text-center">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            Ready to Get Started?
+          </h2>
+          <p className="text-xl text-gray-600 mb-8">
+            Join thousands of successful NMLS exam takers
+          </p>
+          <Link
+            href="/register"
+            className="bg-indigo-600 text-white hover:bg-indigo-700 px-8 py-3 rounded-md text-lg font-medium shadow-lg inline-block"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            Create Your Free Account
+          </Link>
         </div>
       </main>
+
+      {/* Footer */}
+      <footer className="bg-white border-t border-gray-200 mt-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="text-center text-gray-600">
+            <p>&copy; 2026 NMLS Test Prep. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
