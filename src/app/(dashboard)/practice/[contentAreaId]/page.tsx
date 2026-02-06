@@ -117,17 +117,41 @@ export default function QuizPage() {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // Save final answer
+    const finalAnswers = { ...answers };
     if (selectedAnswer) {
-      setAnswers(prev => ({
-        ...prev,
-        [currentQuestionIndex]: selectedAnswer
-      }));
+      finalAnswers[currentQuestionIndex] = selectedAnswer;
     }
 
-    // TODO: Submit to API and navigate to results
-    alert('Test submission coming next! Total answers: ' + Object.keys(answers).length);
+    // Format answers for API
+    const submittedAnswers = testData!.questions.map((q, index) => ({
+      questionId: q.id,
+      selectedAnswer: finalAnswers[index] || ''
+    })).filter(a => a.selectedAnswer); // Only submit answered questions
+
+    try {
+      const response = await fetch('/api/practice/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          attemptId: testData!.attemptId,
+          answers: submittedAnswers
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Navigate to results page
+        router.push(`/practice/${contentAreaId}/results?attemptId=${testData!.attemptId}`);
+      } else {
+        alert('Failed to submit test: ' + (data.error || 'Unknown error'));
+      }
+    } catch (error) {
+      console.error('Error submitting test:', error);
+      alert('Failed to submit test. Please try again.');
+    }
   };
 
   const handleExit = () => {
