@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import { getCurrentUser } from '@/lib/utils/auth';
 import { PerformanceAnalysisService } from '@/services/PerformanceAnalysisService';
+import { emailService } from '@/lib/email';
 
 interface SubmittedAnswer {
   questionId: string;
@@ -173,6 +174,18 @@ export async function POST(request: NextRequest) {
 
     // Update user performance tracking for adaptive learning
     await PerformanceAnalysisService.updatePerformance(user.id, attemptId);
+
+    // Send email notification (async, don't block response)
+    const passed = rawScore >= 75;
+    emailService.sendPracticeTestResult({
+      to: user.email || '',
+      userName: user.name || 'Student',
+      contentArea: updatedAttempt.contentArea?.name || 'Practice Test',
+      score: correctCount,
+      totalQuestions,
+      passed,
+      weakAreas: areasForReview
+    }).catch(err => console.error('[Email] Failed to send practice test result:', err));
 
     return NextResponse.json({
       success: true,

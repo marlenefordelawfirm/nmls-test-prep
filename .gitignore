@@ -42,3 +42,8 @@ next-env.d.ts
 
 /src/generated/prisma
 .env*.local
+
+# Sentry
+.sentryclirc
+.sentry
+sentry.properties
