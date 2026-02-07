@@ -16,18 +16,18 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #020617;
-    /* Slate 950 */
-    --foreground: #f8fafc;
-    /* Slate 50 */
+    --background: #0a0a0a;
+    /* Neutral 950 */
+    --foreground: #fafafa;
+    /* Neutral 50 */
   }
 }
 
 /* Dark mode class-based (for next-themes) */
 .dark {
-  --background: #020617;
-  /* Slate 950 */
-  --foreground: #f8fafc;
+  --background: #0a0a0a;
+  /* Neutral 950 */
+  --foreground: #fafafa;
   /* Slate 50 */
   color-scheme: dark;
 }

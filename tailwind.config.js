@@ -9,10 +9,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        gray: require('tailwindcss/colors').slate,
-        neutral: require('tailwindcss/colors').slate,
-        zinc: require('tailwindcss/colors').slate,
-        stone: require('tailwindcss/colors').slate,
+        slate: require('tailwindcss/colors').neutral,
+        gray: require('tailwindcss/colors').neutral,
+        zinc: require('tailwindcss/colors').neutral,
+        stone: require('tailwindcss/colors').neutral,
       },
     },
   },

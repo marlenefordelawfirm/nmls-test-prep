@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Clock, Grid3x3, ChevronLeft, ChevronRight, Flag, CheckCircle, Pause, Play } from 'lucide-react';
+import { Clock, Grid3x3, ChevronLeft, ChevronRight, Flag, CheckCircle, Pause, Play, ArrowRight } from 'lucide-react';
 import { Question, ContentArea, SubTopic } from '@prisma/client';
 
 interface QuestionWithRelations extends Question {
@@ -165,72 +165,75 @@ export function ExamInterface({ questions, userId }: ExamInterfaceProps) {
 
   if (!examStarted) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-slate-950 p-6">
-        <div className="max-w-2xl w-full bg-white dark:bg-slate-900 rounded-xl shadow-sm border-l-4 border-l-blue-700 p-8">
-          <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
-            NMLS National Exam Simulation
-          </h1>
-          <p className="text-slate-600 dark:text-slate-400 mb-6">
-            Complete the full 125-question exam to test your readiness for the NMLS National Test.
-          </p>
+      <div className="min-h-screen bg-gray-50 dark:bg-neutral-950 py-12 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm border-l-4 border-l-blue-700 p-8 mb-8">
+            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+              NMLS National Exam Simulation
+            </h1>
+            <p className="text-slate-600 dark:text-gray-400 mb-6">
+              Complete the full 125-question exam to test your readiness for the NMLS National Test.
+            </p>
 
-          <div className="grid grid-cols-3 gap-4 mb-6">
-            <div className="bg-slate-50 dark:bg-slate-800 p-4 rounded-xl border border-slate-100 dark:border-slate-700">
-              <p className="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1">Questions</p>
-              <p className="text-2xl font-bold text-slate-900 dark:text-white">125</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+              <div className="bg-white dark:bg-neutral-900 p-6 rounded-xl border border-slate-200 dark:border-neutral-700">
+                <p className="text-xs font-bold text-slate-600 dark:text-gray-400 uppercase tracking-wider mb-2">Questions</p>
+                <p className="text-3xl font-bold text-slate-900 dark:text-white">125</p>
+              </div>
+              <div className="bg-white dark:bg-neutral-900 p-6 rounded-xl border border-slate-200 dark:border-neutral-700">
+                <p className="text-xs font-bold text-slate-600 dark:text-gray-400 uppercase tracking-wider mb-2">Time Limit</p>
+                <p className="text-3xl font-bold text-slate-900 dark:text-white">190 min</p>
+              </div>
+              <div className="bg-white dark:bg-neutral-900 p-6 rounded-xl border border-slate-200 dark:border-neutral-700">
+                <p className="text-xs font-bold text-slate-600 dark:text-gray-400 uppercase tracking-wider mb-2">Passing Score</p>
+                <p className="text-3xl font-bold text-slate-900 dark:text-white">75%</p>
+              </div>
             </div>
-            <div className="bg-slate-50 dark:bg-slate-800 p-4 rounded-xl border border-slate-100 dark:border-slate-700">
-              <p className="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1">Time Limit</p>
-              <p className="text-2xl font-bold text-slate-900 dark:text-white">190 min</p>
+
+            <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border border-blue-100 dark:border-blue-800 mb-8">
+              <h3 className="font-bold text-blue-900 dark:text-blue-100 mb-3 flex items-center gap-2">
+                <Clock className="w-5 h-5" />
+                Important Notes
+              </h3>
+              <ul className="space-y-2 text-sm text-blue-800 dark:text-blue-200">
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-700 dark:text-blue-400 font-bold">•</span>
+                  You can pause the exam at any time using the Pause button
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-700 dark:text-blue-400 font-bold">•</span>
+                  Flag questions for review using the flag icon
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-700 dark:text-blue-400 font-bold">•</span>
+                  Navigate between questions using the question navigator
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-700 dark:text-blue-400 font-bold">•</span>
+                  Time warnings appear at 30, 10, and 5 minutes remaining
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-700 dark:text-blue-400 font-bold">•</span>
+                  The exam will auto-submit when time expires
+                </li>
+              </ul>
             </div>
-            <div className="bg-slate-50 dark:bg-slate-800 p-4 rounded-xl border border-slate-100 dark:border-slate-700">
-              <p className="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1">Passing Score</p>
-              <p className="text-2xl font-bold text-slate-900 dark:text-white">75%</p>
-            </div>
+
+            <button
+              onClick={() => setExamStarted(true)}
+              className="w-full bg-blue-700 hover:bg-blue-800 text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-3"
+            >
+              Start Exam Simulation
+              <ArrowRight className="w-5 h-5" />
+            </button>
           </div>
-
-          <div className="bg-blue-50 rounded-xl p-6 border border-blue-100 mb-8">
-            <h3 className="font-bold text-blue-900 mb-3 flex items-center gap-2">
-              <Clock className="w-5 h-5" />
-              Important Notes
-            </h3>
-            <ul className="space-y-2 text-sm text-blue-800">
-              <li className="flex items-start gap-2">
-                <span className="text-blue-700 font-bold">•</span>
-                You can pause the exam at any time using the Pause button
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-blue-700 font-bold">•</span>
-                Flag questions for review using the flag icon
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-blue-700 font-bold">•</span>
-                Navigate between questions using the question navigator
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-blue-700 font-bold">•</span>
-                Time warnings appear at 30, 10, and 5 minutes remaining
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-blue-700 font-bold">•</span>
-                The exam will auto-submit when time expires
-              </li>
-            </ul>
-          </div>
-
-          <button
-            onClick={() => setExamStarted(true)}
-            className="w-full py-4 bg-blue-700 text-white rounded-xl hover:bg-blue-800 font-bold text-lg transition-all shadow-sm"
-          >
-            Start Exam
-          </button>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-950 flex flex-col">
+    <div className="min-h-screen bg-gray-50 dark:bg-neutral-950 flex flex-col">
       {/* Pause Overlay */}
       {isPaused && (
         <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
@@ -282,7 +285,7 @@ export function ExamInterface({ questions, userId }: ExamInterfaceProps) {
             <div className={`h-10 flex items-center gap-2 px-4 rounded-xl border font-mono text-sm font-bold ${timeWarning === 'critical' ? 'bg-red-50 text-red-700 border-red-200' :
               timeWarning === 'warning' ? 'bg-amber-50 text-amber-700 border-amber-200' :
                 timeWarning === 'caution' ? 'bg-yellow-50 text-yellow-700 border-yellow-200' :
-                  'bg-slate-50 text-slate-900 border-slate-200'
+                  'bg-slate-50 dark:bg-neutral-800 text-slate-900 dark:text-white border-slate-200 dark:border-neutral-700'
               }`}>
               <Clock className="w-4 h-4" />
               {formatTime(timeRemaining)}
@@ -344,8 +347,8 @@ export function ExamInterface({ questions, userId }: ExamInterfaceProps) {
                 <button
                   onClick={toggleFlag}
                   className={`ml-4 w-10 h-10 rounded-xl transition-all border flex items-center justify-center ${flagged.has(currentQuestion)
-                    ? 'bg-amber-50 text-amber-600 hover:bg-amber-100 border-amber-200'
-                    : 'bg-slate-50 text-slate-400 hover:bg-slate-100 dark:bg-slate-800 border-slate-200'
+                    ? 'bg-amber-50 text-amber-600 hover:bg-amber-100 border-amber-200 dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-800 dark:hover:bg-amber-900/30'
+                    : 'bg-slate-50 text-slate-400 hover:bg-slate-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-700 border-slate-200 dark:border-neutral-700'
                     }`}
                   title="Flag for review"
                 >
@@ -363,9 +366,9 @@ export function ExamInterface({ questions, userId }: ExamInterfaceProps) {
                 ].map((option) => (
                   <label
                     key={option.id}
-                    className={`block p-4 rounded-xl border-2 cursor-pointer transition-all ${answers[currentQuestion] === option.id
+                    className={`block p-4 rounded-xl border cursor-pointer transition-all ${answers[currentQuestion] === option.id
                       ? 'border-blue-700 bg-blue-50'
-                      : 'border-slate-200 hover:border-slate-300 bg-white'
+                      : 'border-slate-200 hover:border-slate-300 bg-white dark:bg-slate-800'
                       }`}
                   >
                     <div className="flex items-start gap-3">
@@ -431,12 +434,12 @@ export function ExamInterface({ questions, userId }: ExamInterfaceProps) {
                   key={idx}
                   onClick={() => handleNavigateQuestion(idx)}
                   className={`w-12 h-12 rounded-xl font-bold text-sm transition-all border ${idx === currentQuestion
-                    ? 'bg-blue-700 text-white border-blue-700'
+                    ? 'bg-blue-600 text-white border-blue-600 dark:ring-blue-900'
                     : answers[idx]
-                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100'
+                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-800 dark:hover:bg-emerald-900/30'
                       : flagged.has(idx)
-                        ? 'bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100'
-                        : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100 dark:bg-slate-800'
+                        ? 'bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100 dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-800 dark:hover:bg-amber-900/30'
+                        : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100 dark:bg-neutral-800 dark:text-neutral-400 dark:border-neutral-700 dark:hover:bg-neutral-700'
                     }`}
                 >
                   {idx + 1}
@@ -445,15 +448,15 @@ export function ExamInterface({ questions, userId }: ExamInterfaceProps) {
             </div>
             <div className="mt-6 space-y-3">
               <div className="flex items-center gap-3">
-                <div className="w-5 h-5 bg-emerald-50 border-2 border-emerald-200 rounded"></div>
+                <div className="w-5 h-5 bg-emerald-50 border border-emerald-200 rounded"></div>
                 <span className="text-slate-600 dark:text-slate-400 font-bold text-xs">Answered</span>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-5 h-5 bg-amber-50 border-2 border-amber-200 rounded"></div>
+                <div className="w-5 h-5 bg-amber-50 border border-amber-200 rounded"></div>
                 <span className="text-slate-600 dark:text-slate-400 font-bold text-xs">Flagged</span>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-5 h-5 bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded"></div>
+                <div className="w-5 h-5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded"></div>
                 <span className="text-slate-600 dark:text-slate-400 font-bold text-xs">Not answered</span>
               </div>
             </div>
@@ -469,7 +472,7 @@ export function ExamInterface({ questions, userId }: ExamInterfaceProps) {
             <p className="text-slate-600 dark:text-slate-400 mb-6">
               You have answered <span className="font-bold text-slate-900 dark:text-white">{answeredCount}</span> out of <span className="font-bold text-slate-900">{questions.length}</span> questions.
               {answeredCount < questions.length && (
-                <span className="block mt-3 p-3 bg-amber-50 border border-amber-200 rounded-xl text-amber-700 font-medium text-sm">
+                <span className="block mt-3 p-3 bg-amber-50 border border-amber-200 rounded-xl text-amber-700 font-medium text-sm dark:bg-amber-900/20 dark:border-amber-800 dark:text-amber-400">
                   ⚠️ Warning: {questions.length - answeredCount} questions remain unanswered.
                 </span>
               )}
