@@ -10,10 +10,10 @@ export default function AgentPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
           AI Study Agent
         </h1>
-        <p className="text-gray-600">
+        <p className="text-gray-600 dark:text-gray-300">
           Ask questions about mortgage lending, regulations, calculations, and exam topics.
           Your AI tutor provides step-by-step explanations with sources.
         </p>

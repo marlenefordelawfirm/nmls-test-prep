@@ -27,25 +27,24 @@ export default function TestSentryPage() {
   const myUndefinedFunction = () => {
     setStatus('🚀 Calling undefined function as recommended by Sentry...');
     setTimeout(() => {
-      // @ts-expect-error - This is intentionally calling an undefined function for Sentry testing
       myUndefinedFunction();
     }, 100);
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-950 p-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-neutral-950 dark:bg-neutral-950 p-8">
       <div className="max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white dark:text-white mb-2">
           Sentry Test Page
         </h1>
-        <p className="text-gray-600 dark:text-gray-400 mb-8">
+        <p className="text-gray-600 dark:text-gray-300 dark:text-gray-400 mb-8">
           Test your Sentry integration by clicking the buttons below.
         </p>
 
-        <div className="bg-white dark:bg-slate-900 rounded-lg shadow-lg p-6 space-y-4">
+        <div className="bg-white dark:bg-neutral-900 dark:bg-neutral-900 rounded-lg shadow-lg p-6 space-y-4">
           {/* Test Message */}
           <div>
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+            <h3 className="font-semibold text-gray-900 dark:text-white dark:text-white mb-2">
               1. Send Test Message (Info Level)
             </h3>
             <button
@@ -54,14 +53,14 @@ export default function TestSentryPage() {
             >
               Send Test Message
             </button>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 mt-2">
               Sends a harmless info message to Sentry
             </p>
           </div>
 
           {/* Test Error */}
           <div>
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+            <h3 className="font-semibold text-gray-900 dark:text-white dark:text-white mb-2">
               2. Send Test Error (Captured Exception)
             </h3>
             <button
@@ -70,14 +69,14 @@ export default function TestSentryPage() {
             >
               Send Test Error
             </button>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 mt-2">
               Sends a caught error to Sentry
             </p>
           </div>
 
           {/* Trigger Crash */}
           <div>
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+            <h3 className="font-semibold text-gray-900 dark:text-white dark:text-white mb-2">
               3. Trigger Uncaught Error (Crash)
             </h3>
             <button
@@ -86,14 +85,14 @@ export default function TestSentryPage() {
             >
               Trigger Crash 💥
             </button>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 mt-2">
               Throws an uncaught error (page will crash, but Sentry will catch it)
             </p>
           </div>
 
           {/* Sentry Recommended Test */}
           <div>
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+            <h3 className="font-semibold text-gray-900 dark:text-white dark:text-white mb-2">
               4. Sentry Recommended Test ⭐
             </h3>
             <button
@@ -102,7 +101,7 @@ export default function TestSentryPage() {
             >
               myUndefinedFunction() - Official Sentry Test
             </button>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-400 mt-2">
               Calls myUndefinedFunction() as recommended in Sentry's setup guide
             </p>
           </div>
@@ -131,16 +130,16 @@ export default function TestSentryPage() {
         </div>
 
         {/* Environment Info */}
-        <div className="mt-4 p-4 bg-gray-100 dark:bg-slate-800 rounded-lg">
-          <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
+        <div className="mt-4 p-4 bg-gray-100 dark:bg-neutral-800 dark:bg-neutral-800 rounded-lg">
+          <h4 className="font-semibold text-gray-900 dark:text-white dark:text-white mb-2">
             Environment Variables Status:
           </h4>
           <div className="space-y-1 text-sm font-mono">
-            <div className="text-gray-700 dark:text-gray-300">
+            <div className="text-gray-700 dark:text-gray-200 dark:text-gray-300">
               NEXT_PUBLIC_SENTRY_DSN: {process.env.NEXT_PUBLIC_SENTRY_DSN ? '✅ Set' : '❌ Not set'}
             </div>
             {process.env.NEXT_PUBLIC_SENTRY_DSN && (
-              <div className="text-xs text-gray-500 dark:text-gray-400 break-all">
+              <div className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-400 break-all">
                 {process.env.NEXT_PUBLIC_SENTRY_DSN.substring(0, 50)}...
               </div>
             )}

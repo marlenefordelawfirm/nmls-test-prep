@@ -9,18 +9,17 @@ export default function SentryExamplePage() {
     setClicked(true);
     // This will trigger an error that Sentry will catch
     // Calling a function that doesn't exist - exactly as Sentry recommends
-    // @ts-expect-error - Intentionally calling undefined function for Sentry test
     (window as any).myUndefinedFunction();
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-950 flex items-center justify-center p-8">
-      <div className="max-w-2xl w-full bg-white dark:bg-slate-900 rounded-lg shadow-lg p-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-neutral-950 dark:bg-neutral-950 flex items-center justify-center p-8">
+      <div className="max-w-2xl w-full bg-white dark:bg-neutral-900 dark:bg-neutral-900 rounded-lg shadow-lg p-8">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white dark:text-white mb-4">
           Sentry Example Page
         </h1>
 
-        <p className="text-gray-600 dark:text-gray-400 mb-6">
+        <p className="text-gray-600 dark:text-gray-300 dark:text-gray-400 mb-6">
           Click the button below to trigger a test error and verify your Sentry integration.
         </p>
 
@@ -54,8 +53,8 @@ export default function SentryExamplePage() {
           </ol>
         </div>
 
-        <div className="mt-4 p-4 bg-gray-100 dark:bg-slate-800 rounded-lg">
-          <p className="text-xs text-gray-600 dark:text-gray-400 font-mono">
+        <div className="mt-4 p-4 bg-gray-100 dark:bg-neutral-800 dark:bg-neutral-800 rounded-lg">
+          <p className="text-xs text-gray-600 dark:text-gray-300 dark:text-gray-400 font-mono">
             Sentry DSN: {process.env.NEXT_PUBLIC_SENTRY_DSN ? '✅ Configured' : '❌ Not configured'}
           </p>
         </div>

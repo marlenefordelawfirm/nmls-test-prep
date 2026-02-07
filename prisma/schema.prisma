@@ -34,6 +34,36 @@ model User {
   questionsSeen             QuestionSeen[]
   agentConversations        AgentConversation[]
   userFlashcards            UserFlashcard[]
+  settings                  UserSettings?
+  achievements              UserAchievement[]
+}
+
+model UserSettings {
+  id                    String    @id @default(cuid())
+  userId                String    @unique
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Notification Preferences
+  emailNotifications    Boolean   @default(true)
+  studyReminders        Boolean   @default(true)
+  achievementAlerts     Boolean   @default(true)
+  weeklyProgress        Boolean   @default(false)
+
+  // Study Preferences
+  questionsPerTest      Int       @default(20)
+  enableTimeLimit       Boolean   @default(false)
+  timeLimitMinutes      Int       @default(30)
+  showExplanations      Boolean   @default(true)
+
+  // Appearance Preferences
+  theme                 String    @default("system")
+  fontSize              String    @default("medium")
+  reduceMotion          Boolean   @default(false)
+
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
 }
 
 enum Role {
@@ -389,4 +419,49 @@ model UserFlashcard {
   createdAt       DateTime    @default(now())
 
   @@index([userId, nextReviewDate])
+}
+
+// ============================================================================
+// ACHIEVEMENTS
+// ============================================================================
+
+model Achievement {
+  id              String              @id @default(cuid())
+  key             String              @unique // e.g., "first_test", "perfect_score"
+  title           String
+  description     String              @db.Text
+  category        AchievementCategory
+  targetValue     Int                 // e.g., 1 for "complete 1 test", 100 for "100% score"
+  icon            String?             // Icon name or emoji
+  sortOrder       Int                 @default(0)
+  createdAt       DateTime            @default(now())
+
+  userAchievements UserAchievement[]
+
+  @@index([category])
+}
+
+model UserAchievement {
+  id              String      @id @default(cuid())
+  userId          String
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievementId   String
+  achievement     Achievement @relation(fields: [achievementId], references: [id])
+
+  progress        Int         @default(0)
+  isCompleted     Boolean     @default(false)
+  completedAt     DateTime?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  @@unique([userId, achievementId])
+  @@index([userId, isCompleted])
+}
+
+enum AchievementCategory {
+  TESTS
+  SCORES
+  STREAK
+  STUDY_TIME
+  MASTERY
 }

@@ -22,13 +22,13 @@ export default async function PracticePage() {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <section className="bg-white rounded-xl shadow-sm p-8 border-l-4 border-l-blue-700">
+      <section className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm p-8 border-l-4 border-l-blue-700">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div>
-            <h1 className="text-3xl font-bold text-slate-900 mb-2">
+            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
               Choose Your Practice Area
             </h1>
-            <p className="text-slate-600 leading-relaxed max-w-2xl">
+            <p className="text-slate-600 dark:text-gray-400 leading-relaxed max-w-2xl">
               Select a content area to start practicing. Each practice session includes 20 questions
               tailored to your skill level and performance history.
             </p>
@@ -44,7 +44,7 @@ export default async function PracticePage() {
       </section>
 
       {/* Content Area Cards */}
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
         {contentAreas.map((area) => {
           const questionCount = area.questions.length;
           const subTopicCount = area.subTopics.length;
@@ -52,46 +52,49 @@ export default async function PracticePage() {
           return (
             <article
               key={area.id}
-              className="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-lg hover:border-blue-300 transition-all group"
+              className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm border border-slate-200 dark:border-neutral-700 hover:shadow-lg hover:border-blue-300 transition-all group flex flex-col h-full"
             >
-              <div className="p-6 space-y-4">
+              <div className="p-6 flex flex-col h-full">
                 {/* Icon and Badge */}
-                <div className="flex items-start justify-between">
+                <div className="flex items-start justify-between mb-4">
                   <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center group-hover:bg-blue-100 transition-colors">
                     <BookOpen className="w-6 h-6 text-blue-700" />
                   </div>
-                  <span className="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-full">
+                  <span className="px-3 py-1 bg-slate-100 dark:bg-neutral-800 dark:bg-neutral-800 text-slate-700 dark:text-gray-300 text-xs font-bold rounded-full">
                     {area.percentageOfExam}% of Exam
                   </span>
                 </div>
 
-                {/* Title and Description */}
-                <div>
-                  <h2 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-700 transition-colors">
+                {/* Title and Description - Fixed Height */}
+                <div className="mb-4 flex-shrink-0">
+                  <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-700 transition-colors min-h-[56px] flex items-center">
                     {area.name}
                   </h2>
-                  <p className="text-sm text-slate-600 leading-relaxed line-clamp-2">
+                  <p className="text-sm text-slate-600 dark:text-gray-400 leading-relaxed line-clamp-2 min-h-[40px]">
                     {area.description}
                   </p>
                 </div>
 
+                {/* Spacer to push content down */}
+                <div className="flex-1" />
+
                 {/* Stats */}
-                <div className="flex items-center gap-4 pt-2 border-t border-slate-100">
+                <div className="flex items-center gap-4 pt-4 pb-4 border-t border-slate-100 dark:border-neutral-700 dark:border-neutral-700 flex-shrink-0">
                   <div>
-                    <p className="text-xs text-slate-500">Questions</p>
+                    <p className="text-xs text-slate-600 dark:text-gray-400 dark:text-gray-400">Questions</p>
                     <p className="text-lg font-bold text-slate-900">{questionCount}</p>
                   </div>
                   <div className="w-px h-8 bg-slate-200" />
                   <div>
-                    <p className="text-xs text-slate-500">Sub-Topics</p>
+                    <p className="text-xs text-slate-600 dark:text-gray-400 dark:text-gray-400">Sub-Topics</p>
                     <p className="text-lg font-bold text-slate-900">{subTopicCount}</p>
                   </div>
                 </div>
 
-                {/* Action Button */}
+                {/* Action Button - Always at bottom */}
                 <Link
                   href={`/practice/${area.id}`}
-                  className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-blue-700 text-white text-sm font-bold rounded-xl hover:bg-blue-800 transition-all shadow-sm group-hover:shadow-md"
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-blue-700 text-white text-sm font-bold rounded-xl hover:bg-blue-800 transition-all shadow-sm group-hover:shadow-md flex-shrink-0"
                 >
                   Start Practice
                   <ArrowRight className="w-4 h-4" />
@@ -102,23 +105,6 @@ export default async function PracticePage() {
         })}
       </section>
 
-      {/* Info Banner */}
-      <section className="bg-indigo-50 rounded-xl p-6 border border-indigo-100">
-        <div className="flex items-start gap-4">
-          <div className="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center flex-shrink-0">
-            <Target className="w-5 h-5 text-indigo-700" />
-          </div>
-          <div>
-            <h3 className="text-lg font-bold text-indigo-900 mb-2">
-              Adaptive Learning System
-            </h3>
-            <p className="text-sm text-indigo-700 leading-relaxed">
-              Our AI-powered system tracks your performance and adjusts question difficulty in real-time.
-              Questions focus on areas where you need the most improvement, ensuring efficient study sessions.
-            </p>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

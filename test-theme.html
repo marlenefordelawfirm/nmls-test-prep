@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Theme Test</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
+</head>
+<body class="bg-white dark:bg-slate-900 min-h-screen p-8">
+  <div class="max-w-2xl mx-auto">
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Theme Toggle Test</h1>
+    <p class="text-gray-600 dark:text-gray-300 mb-4">Click the button below to toggle dark mode</p>
+    
+    <button 
+      onclick="toggleTheme()"
+      class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
+    >
+      Toggle Dark Mode
+    </button>
+    
+    <div class="mt-8 p-6 bg-gray-100 dark:bg-gray-800 rounded-lg">
+      <p class="text-gray-900 dark:text-white">This box should change colors when you toggle</p>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Current theme: <span id="theme-status">light</span></p>
+    </div>
+  </div>
+  
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.classList.contains('dark');
+      
+      if (isDark) {
+        html.classList.remove('dark');
+        document.getElementById('theme-status').textContent = 'light';
+      } else {
+        html.classList.add('dark');
+        document.getElementById('theme-status').textContent = 'dark';
+      }
+      
+      console.log('Theme toggled. Classes:', html.className);
+    }
+  </script>
+</body>
+</html>

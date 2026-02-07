@@ -1,0 +1,163 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - button "Open Next.js Dev Tools" [ref=e7] [cursor=pointer]:
+    - img [ref=e8]
+  - alert [ref=e11]
+  - link "Skip to main content" [ref=e12] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e13]:
+    - complementary [ref=e14]:
+      - link "NMLS Prep" [ref=e16] [cursor=pointer]:
+        - /url: /dashboard
+        - img [ref=e18]
+        - generic [ref=e21]: NMLS Prep
+      - navigation [ref=e22]:
+        - link "Dashboard" [ref=e23] [cursor=pointer]:
+          - /url: /dashboard
+          - img [ref=e24]
+          - text: Dashboard
+        - link "Practice Tests" [ref=e27] [cursor=pointer]:
+          - /url: /practice
+          - img [ref=e28]
+          - text: Practice Tests
+        - link "Analytics" [ref=e30] [cursor=pointer]:
+          - /url: /analytics
+          - img [ref=e31]
+          - text: Analytics
+        - link "AI Study Agent" [ref=e33] [cursor=pointer]:
+          - /url: /agent
+          - img [ref=e34]
+          - text: AI Study Agent
+        - link "Full Exam" [ref=e37] [cursor=pointer]:
+          - /url: /exam
+          - img [ref=e38]
+          - text: Full Exam
+        - link "Achievements" [ref=e41] [cursor=pointer]:
+          - /url: /achievements
+          - img [ref=e42]
+          - text: Achievements
+        - link "Settings" [ref=e48] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e49]
+          - text: Settings
+        - link "Help" [ref=e52] [cursor=pointer]:
+          - /url: /help
+          - img [ref=e53]
+          - text: Help
+        - link "Admin" [ref=e56] [cursor=pointer]:
+          - /url: /admin
+          - img [ref=e57]
+          - text: Admin
+      - generic [ref=e59]:
+        - generic [ref=e60]:
+          - generic [ref=e62]: A
+          - generic [ref=e63]:
+            - paragraph [ref=e64]: Admin User
+            - paragraph [ref=e65]: thedamdocta@gmail.com
+        - button "Sign out" [ref=e66]
+    - generic [ref=e67]:
+      - banner [ref=e68]:
+        - heading "Welcome back, Admin User" [level=1] [ref=e70]
+        - generic [ref=e71]:
+          - generic [ref=e72]: Admin
+          - button "Toggle theme" [active] [ref=e73]:
+            - img [ref=e74]
+      - main [ref=e76]:
+        - generic [ref=e77]:
+          - generic [ref=e79]:
+            - generic [ref=e80]:
+              - heading "Welcome back, Admin" [level=1] [ref=e81]
+              - paragraph [ref=e82]:
+                - text: You've completed
+                - generic [ref=e83]: 0/5 modules
+                - text: . Your personalized learning path has identified 3 areas for optimization today to stay on track for your exam.
+            - generic [ref=e84]:
+              - generic [ref=e85]:
+                - paragraph [ref=e86]: Weekly Goal
+                - paragraph [ref=e87]: 40%
+              - generic [ref=e88]:
+                - paragraph [ref=e89]: Study Streak
+                - paragraph [ref=e90]: 1 Days
+              - generic [ref=e91]:
+                - paragraph [ref=e92]: Est. Readiness
+                - paragraph [ref=e93]: Needs Work
+          - generic [ref=e94]:
+            - link "Start Practice Choose a content area" [ref=e95] [cursor=pointer]:
+              - /url: /practice
+              - img [ref=e97]
+              - generic [ref=e99]:
+                - heading "Start Practice" [level=3] [ref=e100]
+                - paragraph [ref=e101]: Choose a content area
+              - img [ref=e102]
+            - button "Full Exam 125 questions, 190 min Soon" [disabled] [ref=e104]:
+              - img [ref=e106]
+              - generic [ref=e109]:
+                - heading "Full Exam" [level=3] [ref=e110]
+                - paragraph [ref=e111]: 125 questions, 190 min
+              - generic [ref=e112]: Soon
+            - button "Review Weak Areas AI-suggested topics Soon" [disabled] [ref=e113]:
+              - img [ref=e115]
+              - generic [ref=e118]:
+                - heading "Review Weak Areas" [level=3] [ref=e119]
+                - paragraph [ref=e120]: AI-suggested topics
+              - generic [ref=e121]: Soon
+          - generic [ref=e123]:
+            - generic [ref=e124]:
+              - generic [ref=e125]:
+                - generic [ref=e126]: In Progress
+                - generic [ref=e127]: "| Course ID: FM-2024"
+              - heading "Federal Mortgage Laws" [level=2] [ref=e128]
+              - paragraph [ref=e129]: "Module 4: Disclosure Requirements & Consumer Privacy Regulations"
+              - generic [ref=e130]:
+                - generic [ref=e131]:
+                  - img [ref=e132]
+                  - generic [ref=e135]: 4h 25m remaining
+                - generic [ref=e136]:
+                  - img [ref=e137]
+                  - generic [ref=e140]: 6 Lessons left
+              - button "Continue learning" [disabled] [ref=e141]:
+                - text: Continue learning
+                - img [ref=e142]
+            - generic [ref=e144]:
+              - img [ref=e145]
+              - generic [ref=e148]:
+                - generic [ref=e149]: 0%
+                - generic [ref=e150]: Progress
+          - generic [ref=e151]:
+            - article [ref=e152]:
+              - heading "Recent Performance" [level=3] [ref=e154]
+              - generic [ref=e155]:
+                - generic "0%"
+                - generic "0%"
+                - generic "0%"
+                - generic "0%"
+                - generic "0%"
+                - generic "67%" [ref=e156]
+                - generic "67%" [ref=e157]
+              - generic [ref=e158]:
+                - generic [ref=e159]:
+                  - paragraph [ref=e160]: Average Score
+                  - paragraph [ref=e161]: 67%
+                - generic [ref=e162]:
+                  - paragraph [ref=e163]: Time on Site
+                  - paragraph [ref=e164]: 0.0h
+            - article [ref=e165]:
+              - generic [ref=e166]:
+                - img [ref=e168]
+                - heading "AI-Driven Focus Areas" [level=3] [ref=e170]
+              - generic [ref=e171]:
+                - generic [ref=e172]:
+                  - paragraph [ref=e173]: Priority Topics
+                  - generic [ref=e174]:
+                    - generic [ref=e175]: TILA Disclosures
+                    - generic [ref=e176]: APR Calculation
+                    - generic [ref=e177]: Privacy Act
+                    - generic [ref=e178]: Escrow Rules
+                - generic [ref=e180]:
+                  - img [ref=e181]
+                  - generic [ref=e183]:
+                    - paragraph [ref=e184]: Learning Insight
+                    - paragraph [ref=e185]: You're struggling with "Timing requirements for Initial Disclosures". Review Lesson 4.2 before your next mock exam.
+```

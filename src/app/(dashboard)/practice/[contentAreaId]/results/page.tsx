@@ -89,16 +89,16 @@ export default function ResultsPage() {
   const accuracyPercentage = Math.round((results.correctAnswers / results.totalQuestions) * 100);
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12 px-4">
+    <div className="min-h-screen bg-slate-50 dark:bg-neutral-800 py-12 px-4">
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Header with Score */}
-        <div className="bg-white rounded-2xl shadow-xl p-12 text-center border border-slate-200">
+        <div className="bg-white dark:bg-neutral-900 rounded-2xl shadow-xl p-12 text-center border border-slate-200">
           {results.passed ? (
             <div className="mb-6">
               <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <CheckCircle2 className="w-12 h-12 text-emerald-600" />
               </div>
-              <h1 className="text-4xl font-black text-slate-900 mb-2">
+              <h1 className="text-4xl font-black text-slate-900 dark:text-white mb-2">
                 Section Mastered! Great work!
               </h1>
               <p className="text-lg text-slate-600">
@@ -110,7 +110,7 @@ export default function ResultsPage() {
               <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Target className="w-12 h-12 text-blue-600" />
               </div>
-              <h1 className="text-4xl font-black text-slate-900 mb-2">
+              <h1 className="text-4xl font-black text-slate-900 dark:text-white mb-2">
                 Keep Practicing!
               </h1>
               <p className="text-lg text-slate-600">
@@ -143,7 +143,7 @@ export default function ResultsPage() {
             </svg>
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               <span className="text-6xl font-black text-slate-900">{results.score}%</span>
-              <span className="text-sm font-bold text-slate-500 uppercase tracking-wider">
+              <span className="text-sm font-bold text-slate-500 dark:text-gray-400 uppercase tracking-wider">
                 Overall Score
               </span>
             </div>
@@ -152,10 +152,10 @@ export default function ResultsPage() {
 
         {/* Performance Breakdown */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-white rounded-xl shadow-sm p-6 border border-slate-200">
+          <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm p-6 border border-slate-200">
             <div className="flex items-center gap-3 mb-2">
               <CheckCircle2 className="w-5 h-5 text-blue-700" />
-              <h3 className="text-sm font-bold text-slate-600 uppercase tracking-wider">
+              <h3 className="text-sm font-bold text-slate-600 dark:text-gray-400 uppercase tracking-wider">
                 Correct Answers
               </h3>
             </div>
@@ -164,10 +164,10 @@ export default function ResultsPage() {
             </p>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm p-6 border border-slate-200">
+          <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm p-6 border border-slate-200">
             <div className="flex items-center gap-3 mb-2">
               <Clock className="w-5 h-5 text-blue-700" />
-              <h3 className="text-sm font-bold text-slate-600 uppercase tracking-wider">
+              <h3 className="text-sm font-bold text-slate-600 dark:text-gray-400 uppercase tracking-wider">
                 Time Spent
               </h3>
             </div>
@@ -176,10 +176,10 @@ export default function ResultsPage() {
             </p>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm p-6 border border-slate-200">
+          <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm p-6 border border-slate-200">
             <div className="flex items-center gap-3 mb-2">
               <Target className="w-5 h-5 text-blue-700" />
-              <h3 className="text-sm font-bold text-slate-600 uppercase tracking-wider">
+              <h3 className="text-sm font-bold text-slate-600 dark:text-gray-400 uppercase tracking-wider">
                 Accuracy
               </h3>
             </div>
@@ -193,7 +193,7 @@ export default function ResultsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Strengths */}
           {results.strengths.length > 0 && (
-            <div className="bg-white rounded-xl shadow-sm p-6 border border-slate-200">
+            <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm p-6 border border-slate-200">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center">
                   <TrendingUp className="w-6 h-6 text-emerald-600" />
@@ -213,7 +213,7 @@ export default function ResultsPage() {
 
           {/* Areas for Review */}
           {results.areasForReview.length > 0 && (
-            <div className="bg-white rounded-xl shadow-sm p-6 border border-slate-200">
+            <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm p-6 border border-slate-200">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center">
                   <Target className="w-6 h-6 text-amber-600" />
@@ -244,7 +244,7 @@ export default function ResultsPage() {
 
           <button
             onClick={() => router.push(`/practice/${contentAreaId}/review?attemptId=${attemptId}`)}
-            className="flex-1 flex items-center justify-center gap-2 px-8 py-4 bg-white text-slate-700 text-lg font-bold rounded-xl border-2 border-slate-200 hover:bg-slate-50 transition-all"
+            className="flex-1 flex items-center justify-center gap-2 px-8 py-4 bg-white dark:bg-neutral-900 text-slate-700 dark:text-gray-300 text-lg font-bold rounded-xl border-2 border-slate-200 dark:border-neutral-700 hover:bg-slate-50 dark:hover:bg-neutral-700 dark:bg-neutral-800 transition-all"
           >
             <Eye className="w-5 h-5" />
             Review Answers

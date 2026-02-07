@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import bcrypt from 'bcryptjs';
 import { z } from 'zod';
+import { rateLimit, RateLimitPresets, addRateLimitHeaders } from '@/lib/rate-limit';
 
 const RegisterSchema = z.object({
   email: z.string().email('Invalid email format'),
@@ -16,6 +17,12 @@ const RegisterSchema = z.object({
 });
 
 export async function POST(req: NextRequest) {
+  // Apply rate limiting (5 requests per 15 minutes)
+  const rateLimitResult = await rateLimit(req, RateLimitPresets.auth);
+  if (!rateLimitResult.success && rateLimitResult.response) {
+    return rateLimitResult.response;
+  }
+
   try {
     const body = await req.json();
     const data = RegisterSchema.parse(body);
@@ -41,7 +48,7 @@ export async function POST(req: NextRequest) {
     // Hash password with bcrypt (12 rounds)
     const passwordHash = await bcrypt.hash(data.password, 12);
 
-    // Create user
+    // Create user with default settings
     const user = await prisma.user.create({
       data: {
         email: data.email,
@@ -49,7 +56,23 @@ export async function POST(req: NextRequest) {
         name: data.name,
         state: data.state,
         role: 'STUDENT',
-        subscriptionTier: 'FREE'
+        subscriptionTier: 'FREE',
+        settings: {
+          create: {
+            // All fields use defaults from schema
+            // emailNotifications: true,
+            // studyReminders: true,
+            // achievementAlerts: true,
+            // weeklyProgress: false,
+            // questionsPerTest: 20,
+            // enableTimeLimit: false,
+            // timeLimitMinutes: 30,
+            // showExplanations: true,
+            // theme: 'system',
+            // fontSize: 'medium',
+            // reduceMotion: false,
+          }
+        }
       },
       select: {
         id: true,
@@ -61,11 +84,13 @@ export async function POST(req: NextRequest) {
       }
     });
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       success: true,
       data: { user },
       error: null
     }, { status: 201 });
+
+    return addRateLimitHeaders(response, rateLimitResult);
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(

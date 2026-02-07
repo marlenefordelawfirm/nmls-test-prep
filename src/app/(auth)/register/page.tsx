@@ -80,7 +80,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 bg-[radial-gradient(#cbd5e1_0.5px,transparent_0.5px)] bg-[length:24px_24px] px-4 sm:px-6 lg:px-8 py-12">
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-neutral-800 bg-[radial-gradient(#cbd5e1_0.5px,transparent_0.5px)] bg-[length:24px_24px] px-4 sm:px-6 lg:px-8 py-12">
       <div className="max-w-md w-full">
         {/* Logo and Header */}
         <div className="text-center mb-8">
@@ -90,7 +90,7 @@ export default function RegisterPage() {
             </div>
             <span className="text-2xl font-black text-blue-700 tracking-tight">NMLS Test Prep</span>
           </Link>
-          <h2 className="text-3xl font-black text-slate-900 tracking-tight">
+          <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">
             Create your account
           </h2>
           <p className="mt-2 text-slate-600">
@@ -99,7 +99,7 @@ export default function RegisterPage() {
         </div>
 
         {/* Form Card */}
-        <div className="bg-white rounded-2xl shadow-xl p-8 border border-slate-200/50">
+        <div className="bg-white dark:bg-neutral-900 rounded-2xl shadow-xl p-8 border border-slate-200 dark:border-neutral-700/50">
           <form className="space-y-5" onSubmit={handleSubmit}>
             {error && (
               <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl" role="alert">
@@ -112,7 +112,7 @@ export default function RegisterPage() {
 
             <div className="space-y-4">
               <div>
-                <label htmlFor="name" className="block text-sm font-bold text-slate-700 mb-2">
+                <label htmlFor="name" className="block text-sm font-bold text-slate-700 dark:text-gray-300 mb-2">
                   Full Name
                 </label>
                 <input
@@ -122,13 +122,13 @@ export default function RegisterPage() {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="appearance-none block w-full px-4 py-3 border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent transition-all"
+                  className="appearance-none block w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent transition-all"
                   placeholder="John Doe"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-bold text-slate-700 mb-2">
+                <label htmlFor="email" className="block text-sm font-bold text-slate-700 dark:text-gray-300 mb-2">
                   Email address
                 </label>
                 <input
@@ -139,13 +139,13 @@ export default function RegisterPage() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="appearance-none block w-full px-4 py-3 border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent transition-all"
+                  className="appearance-none block w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent transition-all"
                   placeholder="you@example.com"
                 />
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-bold text-slate-700 mb-2">
+                <label htmlFor="password" className="block text-sm font-bold text-slate-700 dark:text-gray-300 mb-2">
                   Password
                 </label>
                 <input
@@ -156,17 +156,17 @@ export default function RegisterPage() {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="appearance-none block w-full px-4 py-3 border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent transition-all"
+                  className="appearance-none block w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent transition-all"
                   placeholder="••••••••••••"
                 />
-                <p className="mt-2 text-xs text-slate-500 flex items-start gap-2">
+                <p className="mt-2 text-xs text-slate-600 dark:text-gray-400 dark:text-gray-400 flex items-start gap-2">
                   <Info className="w-4 h-4 flex-shrink-0" />
                   <span>Must be 12+ characters with uppercase, lowercase, number, and special character</span>
                 </p>
               </div>
 
               <div>
-                <label htmlFor="state" className="block text-sm font-bold text-slate-700 mb-2">
+                <label htmlFor="state" className="block text-sm font-bold text-slate-700 dark:text-gray-300 mb-2">
                   State <span className="text-slate-400 font-normal">(Optional)</span>
                 </label>
                 <select
@@ -174,7 +174,7 @@ export default function RegisterPage() {
                   name="state"
                   value={formData.state}
                   onChange={handleChange}
-                  className="appearance-none block w-full px-4 py-3 border border-slate-300 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent transition-all bg-white"
+                  className="appearance-none block w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent transition-all bg-white dark:bg-neutral-900"
                 >
                   <option value="">Select a state</option>
                   {US_STATES.map((state) => (
@@ -183,7 +183,7 @@ export default function RegisterPage() {
                     </option>
                   ))}
                 </select>
-                <p className="mt-2 text-xs text-slate-500 flex items-start gap-2">
+                <p className="mt-2 text-xs text-slate-600 dark:text-gray-400 dark:text-gray-400 flex items-start gap-2">
                   <MapPin className="w-4 h-4 flex-shrink-0" />
                   <span>For state-specific NMLS content</span>
                 </p>
@@ -222,7 +222,7 @@ export default function RegisterPage() {
 
         {/* Back to Home */}
         <div className="text-center mt-6">
-          <Link href="/" className="text-sm text-slate-600 hover:text-slate-900 transition-colors inline-flex items-center gap-2">
+          <Link href="/" className="text-sm text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:text-white transition-colors inline-flex items-center gap-2">
             <ArrowLeft className="w-4 h-4" />
             Back to home
           </Link>

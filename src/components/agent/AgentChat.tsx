@@ -117,41 +117,41 @@ export function AgentChat({ conversationId: initialConversationId }: AgentChatPr
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-12rem)] bg-white rounded-lg shadow-lg border border-gray-200">
+    <div className="flex flex-col h-[calc(100vh-12rem)] bg-white dark:bg-neutral-900 rounded-lg shadow-lg border border-gray-200 dark:border-neutral-700">
       {/* Messages Container */}
       <div className="flex-1 overflow-y-auto p-6 space-y-6">
         {messages.length === 0 && (
           <div className="text-center py-12">
             <Bot className="w-16 h-16 text-indigo-500 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
               NMLS Study Agent
             </h3>
-            <p className="text-gray-600 max-w-md mx-auto">
+            <p className="text-gray-600 dark:text-gray-300 max-w-md mx-auto">
               Ask me anything about mortgage lending, regulations, calculations, or exam topics.
               I'll provide step-by-step explanations with sources.
             </p>
             <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-3 max-w-2xl mx-auto">
               <button
                 onClick={() => setInput('Calculate the monthly payment for a $300,000 loan at 6.5% APR for 30 years')}
-                className="p-3 text-left text-sm border border-gray-200 rounded-lg hover:border-indigo-500 hover:bg-indigo-50 transition-colors"
+                className="p-3 text-left text-sm border border-gray-200 dark:border-neutral-700 rounded-lg hover:border-indigo-500 hover:bg-indigo-50 transition-colors"
               >
                 💰 Calculate monthly payment
               </button>
               <button
                 onClick={() => setInput('What are the key requirements of TILA-RESPA?')}
-                className="p-3 text-left text-sm border border-gray-200 rounded-lg hover:border-indigo-500 hover:bg-indigo-50 transition-colors"
+                className="p-3 text-left text-sm border border-gray-200 dark:border-neutral-700 rounded-lg hover:border-indigo-500 hover:bg-indigo-50 transition-colors"
               >
                 📋 Explain TILA-RESPA
               </button>
               <button
                 onClick={() => setInput('Show me an example of a Closing Disclosure form')}
-                className="p-3 text-left text-sm border border-gray-200 rounded-lg hover:border-indigo-500 hover:bg-indigo-50 transition-colors"
+                className="p-3 text-left text-sm border border-gray-200 dark:border-neutral-700 rounded-lg hover:border-indigo-500 hover:bg-indigo-50 transition-colors"
               >
                 📄 View form examples
               </button>
               <button
                 onClick={() => setInput('What is the difference between APR and interest rate?')}
-                className="p-3 text-left text-sm border border-gray-200 rounded-lg hover:border-indigo-500 hover:bg-indigo-50 transition-colors"
+                className="p-3 text-left text-sm border border-gray-200 dark:border-neutral-700 rounded-lg hover:border-indigo-500 hover:bg-indigo-50 transition-colors"
               >
                 🤔 APR vs Interest Rate
               </button>
@@ -188,13 +188,13 @@ export function AgentChat({ conversationId: initialConversationId }: AgentChatPr
                       <p className="font-medium text-amber-800 mb-1">
                         Step {calc.step}:
                       </p>
-                      <p className="text-sm text-gray-700 mb-1">
+                      <p className="text-sm text-gray-700 dark:text-gray-200 mb-1">
                         {calc.description}
                       </p>
                       {calc.formula && (
-                        <div className="mt-2 p-2 bg-white rounded border border-amber-200">
-                          <p className="text-xs font-semibold text-gray-600 mb-1">Formula:</p>
-                          <code className="text-sm text-gray-900">{calc.formula}</code>
+                        <div className="mt-2 p-2 bg-white dark:bg-neutral-900 rounded border border-amber-200">
+                          <p className="text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Formula:</p>
+                          <code className="text-sm text-gray-900 dark:text-white">{calc.formula}</code>
                         </div>
                       )}
                       {calc.result && (
@@ -234,7 +234,7 @@ export function AgentChat({ conversationId: initialConversationId }: AgentChatPr
               {msg.images && msg.images.length > 0 && (
                 <div className="mt-3 space-y-3">
                   {msg.images.map((img, idx) => (
-                    <div key={idx} className="border border-gray-200 rounded-lg overflow-hidden">
+                    <div key={idx} className="border border-gray-200 dark:border-neutral-700 rounded-lg overflow-hidden">
                       <img
                         src={img.url}
                         alt={img.caption}
@@ -244,7 +244,7 @@ export function AgentChat({ conversationId: initialConversationId }: AgentChatPr
                           e.currentTarget.src = `https://via.placeholder.com/800x400?text=${encodeURIComponent(img.caption)}`;
                         }}
                       />
-                      <p className="text-xs text-gray-600 p-2 bg-gray-50 border-t border-gray-200">
+                      <p className="text-xs text-gray-600 dark:text-gray-300 p-2 bg-gray-50 dark:bg-neutral-950 border-t border-gray-200 dark:border-neutral-700">
                         {img.caption}
                       </p>
                     </div>
@@ -254,7 +254,7 @@ export function AgentChat({ conversationId: initialConversationId }: AgentChatPr
             </div>
 
             {msg.role === 'user' && (
-              <div className="w-10 h-10 rounded-full bg-gray-500 flex items-center justify-center flex-shrink-0">
+              <div className="w-10 h-10 rounded-full bg-gray-50 dark:bg-neutral-9500 flex items-center justify-center flex-shrink-0">
                 <User className="w-6 h-6 text-white" />
               </div>
             )}
@@ -266,8 +266,8 @@ export function AgentChat({ conversationId: initialConversationId }: AgentChatPr
             <div className="w-10 h-10 rounded-full bg-indigo-500 flex items-center justify-center">
               <Bot className="w-6 h-6 text-white" />
             </div>
-            <div className="bg-gray-100 p-4 rounded-lg">
-              <div className="flex items-center gap-2 text-gray-600">
+            <div className="bg-gray-100 dark:bg-neutral-800 p-4 rounded-lg">
+              <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
                 <Loader2 className="w-4 h-4 animate-spin" />
                 <span className="text-sm">Thinking...</span>
               </div>
@@ -279,7 +279,7 @@ export function AgentChat({ conversationId: initialConversationId }: AgentChatPr
       </div>
 
       {/* Input Area */}
-      <div className="p-4 border-t border-gray-200 bg-gray-50">
+      <div className="p-4 border-t border-gray-200 dark:border-neutral-700 bg-gray-50 dark:bg-neutral-950">
         <div className="flex gap-3">
           <textarea
             ref={inputRef}
@@ -287,7 +287,7 @@ export function AgentChat({ conversationId: initialConversationId }: AgentChatPr
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="Ask a mortgage lending question..."
-            className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
+            className="flex-1 px-4 py-3 border border-gray-300 dark:border-neutral-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
             rows={1}
             disabled={loading}
           />
@@ -303,7 +303,7 @@ export function AgentChat({ conversationId: initialConversationId }: AgentChatPr
             )}
           </button>
         </div>
-        <p className="text-xs text-gray-500 mt-2">
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
           Press Enter to send, Shift+Enter for new line
         </p>
       </div>

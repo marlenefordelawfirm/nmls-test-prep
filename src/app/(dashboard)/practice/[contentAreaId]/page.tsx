@@ -194,13 +194,13 @@ export default function QuizPage() {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Header */}
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
+      <header className="bg-white dark:bg-neutral-900 border-b border-slate-200 dark:border-neutral-700 sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <button
                 onClick={handleExit}
-                className="text-slate-600 hover:text-slate-900 transition-colors"
+                className="text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:text-white transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -219,7 +219,7 @@ export default function QuizPage() {
           </div>
 
           {/* Progress Bar */}
-          <div className="mt-4 h-2 bg-slate-200 rounded-full overflow-hidden">
+          <div className="mt-4 h-2 bg-slate-200 dark:bg-neutral-700 rounded-full overflow-hidden">
             <div
               className="h-full bg-blue-700 transition-all duration-300"
               style={{ width: `${progress}%` }}
@@ -230,7 +230,7 @@ export default function QuizPage() {
 
       {/* Question Content */}
       <main className="max-w-4xl mx-auto px-6 py-8">
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 mb-6">
+        <div className="bg-white dark:bg-neutral-900 rounded-2xl shadow-sm border border-slate-200 dark:border-neutral-700 p-8 mb-6">
           {/* Question */}
           <div className="mb-8">
             <div className="flex items-center gap-2 mb-4">
@@ -240,7 +240,7 @@ export default function QuizPage() {
               <span className="text-xs text-slate-500">{currentQuestion.subTopic}</span>
             </div>
 
-            <h2 className="text-2xl font-bold text-slate-900 leading-relaxed">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white leading-relaxed">
               {currentQuestion.questionText}
             </h2>
           </div>
@@ -273,7 +273,7 @@ export default function QuizPage() {
                       <span className="font-bold text-slate-900">{option}.</span>
                       {isSelected && <CheckCircle2 className="w-5 h-5 text-blue-700" />}
                     </div>
-                    <p className="text-slate-700 leading-relaxed">{optionText}</p>
+                    <p className="text-slate-700 dark:text-gray-300 leading-relaxed">{optionText}</p>
                   </div>
                 </label>
               );
@@ -286,7 +286,7 @@ export default function QuizPage() {
           <button
             onClick={handlePrevious}
             disabled={currentQuestionIndex === 0}
-            className="flex items-center gap-2 px-6 py-3 text-slate-700 hover:text-slate-900 font-bold rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="flex items-center gap-2 px-6 py-3 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:text-white font-bold rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
             Previous
@@ -314,8 +314,8 @@ export default function QuizPage() {
         </div>
 
         {/* Question Navigator */}
-        <div className="mt-8 bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <h3 className="text-sm font-bold text-slate-700 mb-4">Question Navigator</h3>
+        <div className="mt-8 bg-white dark:bg-neutral-900 rounded-xl shadow-sm border border-slate-200 dark:border-neutral-700 p-6">
+          <h3 className="text-sm font-bold text-slate-700 dark:text-gray-300 mb-4">Question Navigator</h3>
           <div className="grid grid-cols-10 gap-2">
             {testData.questions.map((_, index) => {
               const isAnswered = answers[index] !== undefined;
