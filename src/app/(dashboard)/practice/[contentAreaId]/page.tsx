@@ -269,24 +269,36 @@ export default function QuizPage() {
 
             <div className="flex items-center gap-4">
               {/* Study Mode Toggle */}
-              <button
-                onClick={() => setIsStudyMode(prev => !prev)}
-                className="flex items-center gap-2"
-                title={isStudyMode ? 'Disable Study Mode' : 'Enable Study Mode'}
-              >
-                <span className="text-xs font-semibold text-slate-600 dark:text-gray-400">Study Mode</span>
-                <div
-                  className={`relative w-10 h-5 rounded-full transition-colors ${
-                    isStudyMode ? 'bg-emerald-500' : 'bg-slate-300 dark:bg-neutral-600'
-                  }`}
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={() => setIsStudyMode(prev => !prev)}
+                  className="flex items-center gap-2"
+                  title={isStudyMode ? 'Disable Study Mode' : 'Enable Study Mode'}
                 >
+                  <span className="text-xs font-semibold text-slate-600 dark:text-gray-400">Study Mode</span>
                   <div
-                    className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${
-                      isStudyMode ? 'translate-x-5' : 'translate-x-0'
+                    className={`relative w-10 h-5 rounded-full transition-colors ${
+                      isStudyMode ? 'bg-emerald-500' : 'bg-slate-300 dark:bg-neutral-600'
                     }`}
-                  />
+                  >
+                    <div
+                      className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${
+                        isStudyMode ? 'translate-x-5' : 'translate-x-0'
+                      }`}
+                    />
+                  </div>
+                </button>
+                <div className="relative group">
+                  <Info className="w-4 h-4 text-slate-400 dark:text-gray-500 cursor-help" />
+                  <div className="absolute right-0 top-full mt-2 w-64 p-3 bg-slate-900 dark:bg-neutral-700 text-white text-xs rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                    <p className="font-semibold mb-1">What is Study Mode?</p>
+                    <p className="text-slate-300 dark:text-gray-300 leading-relaxed">
+                      When enabled, you get instant feedback after each answer. You'll see if you were correct or incorrect, the right answer is highlighted, and the explanation is shown. Your answer locks after selection.
+                    </p>
+                    <div className="absolute -top-1 right-3 w-2 h-2 bg-slate-900 dark:bg-neutral-700 rotate-45" />
+                  </div>
                 </div>
-              </button>
+              </div>
 
               <div className="flex items-center gap-2 text-slate-600">
                 <Clock className="w-4 h-4" />
