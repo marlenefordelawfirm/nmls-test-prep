@@ -23,11 +23,23 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { attemptId, answers } = body as { attemptId: string; answers: SubmittedAnswer[] };
 
-    if (!attemptId || !answers || !Array.isArray(answers)) {
+    if (!attemptId) {
       return NextResponse.json(
-        { error: 'Attempt ID and answers are required' },
+        { error: 'Attempt ID is required' },
         { status: 400 }
       );
+    }
+
+    if (!answers || !Array.isArray(answers)) {
+      return NextResponse.json(
+        { error: 'Answers must be an array' },
+        { status: 400 }
+      );
+    }
+
+    // Log warning for empty submissions but allow them (0% score)
+    if (answers.length === 0) {
+      console.warn(`[SUBMIT] User submitted test with no answers: ${attemptId}`);
     }
 
     // Verify test attempt exists and belongs to user
@@ -72,11 +84,56 @@ export async function POST(request: NextRequest) {
 
     const questionMap = new Map(questions.map(q => [q.id, q]));
 
-    // Grade answers
+    // Log received data for debugging
+    console.log('[SUBMIT] Received data:', {
+      attemptId,
+      answerCount: answers.length,
+      answers: answers.map((a, i) => ({
+        index: i,
+        questionId: a.questionId,
+        selectedAnswer: a.selectedAnswer,
+        type: typeof a.selectedAnswer,
+        length: a.selectedAnswer?.length
+      }))
+    });
+
+    // Validate all questions exist
+    const missingQuestions = answers.filter(a => !questionMap.has(a.questionId));
+    if (missingQuestions.length > 0) {
+      console.error('[GRADING ERROR] Missing questions:', missingQuestions);
+      return NextResponse.json(
+        { error: 'Invalid questions submitted' },
+        { status: 400 }
+      );
+    }
+
+    // Grade answers with robust comparison
     let correctCount = 0;
     const gradedAnswers = answers.map(answer => {
       const question = questionMap.get(answer.questionId);
-      const isCorrect = question ? question.correctAnswer === answer.selectedAnswer : false;
+
+      if (!question) {
+        console.error(`[GRADING ERROR] Question not found: ${answer.questionId}`);
+        return {
+          testAttemptId: attemptId,
+          questionId: answer.questionId,
+          selectedAnswer: answer.selectedAnswer,
+          isCorrect: false,
+          timeSpent: 0
+        };
+      }
+
+      // Normalize correctAnswer: handle "optionA" -> "A" format as well as plain "A"
+      let rawCorrect = (question.correctAnswer || '').trim();
+      if (rawCorrect.toLowerCase().startsWith('option')) {
+        rawCorrect = rawCorrect.replace(/^option/i, '');
+      }
+      const correctAnswer = rawCorrect.toUpperCase();
+      const selectedAnswer = (answer.selectedAnswer || '').trim().toUpperCase();
+
+      const isCorrect = correctAnswer === selectedAnswer;
+
+      console.log(`[GRADING] Q:${answer.questionId} Normalized Correct:"${correctAnswer}" Normalized Selected:"${selectedAnswer}" Match:${isCorrect}`);
 
       if (isCorrect) {
         correctCount++;
@@ -85,7 +142,7 @@ export async function POST(request: NextRequest) {
       return {
         testAttemptId: attemptId,
         questionId: answer.questionId,
-        selectedAnswer: answer.selectedAnswer,
+        selectedAnswer: answer.selectedAnswer, // Store original
         isCorrect,
         timeSpent: 0 // TODO: Track time per question in future
       };
@@ -93,7 +150,7 @@ export async function POST(request: NextRequest) {
 
     // Calculate scores
     const totalQuestions = answers.length;
-    const rawScore = (correctCount / totalQuestions) * 100;
+    const rawScore = totalQuestions > 0 ? (correctCount / totalQuestions) * 100 : 0;
 
     // Save answers to database
     await prisma.answer.createMany({

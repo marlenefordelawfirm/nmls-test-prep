@@ -28,11 +28,12 @@ export function middleware(request: NextRequest) {
   // Note: This is a baseline policy. Adjust based on your needs.
   const csp = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // unsafe-eval needed for Next.js dev mode
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:", // unsafe-eval needed for Next.js dev mode; blob: for Sentry workers
+    "worker-src 'self' blob:", // Allow Web Workers from blob URLs (Sentry replay)
     "style-src 'self' 'unsafe-inline'", // unsafe-inline needed for Tailwind
     "img-src 'self' data: https:",
     "font-src 'self' data:",
-    "connect-src 'self' https://api.openai.com https://api.anthropic.com",
+    "connect-src 'self' https://api.openai.com https://api.anthropic.com https://o4508207026257920.ingest.us.sentry.io", // Added Sentry ingest
     "frame-ancestors 'none'",
     "base-uri 'self'",
     "form-action 'self'",

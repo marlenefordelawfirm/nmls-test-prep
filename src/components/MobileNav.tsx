@@ -45,7 +45,7 @@ export function MobileNav({ userName, userEmail, userRole }: MobileNavProps) {
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
-          className="md:hidden fixed inset-0 bg-black/50 z-40 backdrop-blur-sm"
+          className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 md:hidden"
           aria-hidden="true"
         />
       )}
@@ -53,7 +53,7 @@ export function MobileNav({ userName, userEmail, userRole }: MobileNavProps) {
       {/* Mobile Sidebar */}
       <aside
         className={`
-          fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-700
+          fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-neutral-900 border-r border-slate-200 dark:border-slate-700
           transform transition-transform duration-300 ease-in-out
           ${isOpen ? 'translate-x-0' : '-translate-x-full'}
           md:hidden flex flex-col

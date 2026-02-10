@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
       }
     });
 
-    // Format questions for response (hide correct answers)
+    // Format questions for response (include correct answers for study mode)
     const formattedQuestions = selectedQuestions.map((q, index) => ({
       id: q.id,
       questionNumber: index + 1,
@@ -73,6 +73,8 @@ export async function POST(request: NextRequest) {
       optionB: q.optionB,
       optionC: q.optionC,
       optionD: q.optionD,
+      correctAnswer: q.correctAnswer,
+      explanation: q.explanation,
       difficulty: q.difficulty,
       subTopic: q.subTopic.name
     }));

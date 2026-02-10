@@ -166,7 +166,7 @@ export default async function DashboardPage() {
           </Link>
 
           <button
-            className="bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 border-slate-200 dark:border-slate-700 p-6 rounded-xl transition-all flex items-center gap-4 group border"
+            className="bg-white dark:bg-neutral-900 hover:bg-slate-50 dark:hover:bg-neutral-800 border-slate-200 dark:border-neutral-700 p-6 rounded-xl transition-all flex items-center gap-4 group border"
             disabled
           >
             <div className="w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded-xl flex items-center justify-center">
@@ -180,7 +180,7 @@ export default async function DashboardPage() {
           </button>
 
           <button
-            className="bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 border-slate-200 dark:border-slate-700 p-6 rounded-xl transition-all flex items-center gap-4 group border"
+            className="bg-white dark:bg-neutral-900 hover:bg-slate-50 dark:hover:bg-neutral-800 border-slate-200 dark:border-neutral-700 p-6 rounded-xl transition-all flex items-center gap-4 group border"
             disabled
           >
             <div className="w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded-xl flex items-center justify-center">
@@ -195,7 +195,7 @@ export default async function DashboardPage() {
         </section>
 
         {/* Current Module Progress */}
-        <section className="bg-white dark:bg-slate-900 rounded-xl shadow-sm p-8">
+        <section className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm p-8">
           <div className="flex flex-col lg:flex-row items-center gap-12">
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-4">
@@ -263,7 +263,7 @@ export default async function DashboardPage() {
         {/* Performance and Focus Areas Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Recent Performance */}
-          <article className="bg-white dark:bg-slate-900 rounded-xl shadow-sm p-8">
+          <article className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm p-8">
             <div className="flex justify-between items-center mb-8">
               <h3 className="text-xl font-bold text-slate-800 dark:text-white">Recent Performance</h3>
               {scoreTrend !== 0 && (
@@ -303,7 +303,7 @@ export default async function DashboardPage() {
           </article>
 
           {/* AI-Driven Focus Areas */}
-          <article className="bg-white dark:bg-slate-900 rounded-xl shadow-sm p-8">
+          <article className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm p-8">
             <div className="flex items-center gap-3 mb-8">
               <div className="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center">
                 <Zap className="w-6 h-6" />

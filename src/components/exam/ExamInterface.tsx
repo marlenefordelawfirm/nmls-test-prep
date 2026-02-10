@@ -237,7 +237,7 @@ export function ExamInterface({ questions, userId }: ExamInterfaceProps) {
       {/* Pause Overlay */}
       {isPaused && (
         <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-slate-900 rounded-xl shadow-2xl p-8 max-w-md">
+          <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-2xl p-8 max-w-md">
             <div className="text-center">
               <div className="w-16 h-16 bg-blue-50 rounded-xl flex items-center justify-center mx-auto mb-4">
                 <Pause className="w-8 h-8 text-blue-700" />

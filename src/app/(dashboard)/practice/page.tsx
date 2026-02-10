@@ -60,7 +60,7 @@ export default async function PracticePage() {
                   <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center group-hover:bg-blue-100 transition-colors">
                     <BookOpen className="w-6 h-6 text-blue-700" />
                   </div>
-                  <span className="px-3 py-1 bg-slate-100 dark:bg-neutral-800 dark:bg-neutral-800 text-slate-700 dark:text-gray-300 text-xs font-bold rounded-full">
+                  <span className="px-3 py-1 bg-slate-100 dark:bg-neutral-800 text-slate-700 dark:text-gray-300 text-xs font-bold rounded-full">
                     {area.percentageOfExam}% of Exam
                   </span>
                 </div>
@@ -79,15 +79,15 @@ export default async function PracticePage() {
                 <div className="flex-1" />
 
                 {/* Stats */}
-                <div className="flex items-center gap-4 pt-4 pb-4 border-t border-slate-100 dark:border-neutral-700 dark:border-neutral-700 flex-shrink-0">
+                <div className="flex items-center gap-4 pt-4 pb-4 border-t border-slate-100 dark:border-neutral-700 flex-shrink-0">
                   <div>
-                    <p className="text-xs text-slate-600 dark:text-gray-400 dark:text-gray-400">Questions</p>
-                    <p className="text-lg font-bold text-slate-900">{questionCount}</p>
+                    <p className="text-xs text-slate-600 dark:text-gray-400">Questions</p>
+                    <p className="text-lg font-bold text-slate-900 dark:text-white">{questionCount}</p>
                   </div>
                   <div className="w-px h-8 bg-slate-200" />
                   <div>
-                    <p className="text-xs text-slate-600 dark:text-gray-400 dark:text-gray-400">Sub-Topics</p>
-                    <p className="text-lg font-bold text-slate-900">{subTopicCount}</p>
+                    <p className="text-xs text-slate-600 dark:text-gray-400">Sub-Topics</p>
+                    <p className="text-lg font-bold text-slate-900 dark:text-white">{subTopicCount}</p>
                   </div>
                 </div>
 

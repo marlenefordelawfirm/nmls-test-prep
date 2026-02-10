@@ -18,6 +18,8 @@ export interface SelectedQuestion {
   optionB: string;
   optionC: string;
   optionD: string;
+  correctAnswer: string;
+  explanation: string | null;
   difficulty: string;
   bloomsLevel: string;
   subTopic: {
